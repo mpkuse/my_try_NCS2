@@ -1,12 +1,12 @@
-# Keras Model 
-rm -v *.h5
+# Keras Model
+rm -vi *.h5
 
 # Frozen Tensorflow graph
-rm -v *.pb
-rm -v *.pbtxt
-rm -v *.log 
+rm -vi *.pb
+rm -vi *.pbtxt
+rm -vi *.log
 
 # Intel's IR
-rm -v *.xml
-rm -v *.mapping
-rm -v *.bin
+rm -vi *.xml
+rm -vi *.mapping
+rm -vi *.bin

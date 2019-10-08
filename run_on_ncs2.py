@@ -55,19 +55,25 @@ display_info(input_shape, output_shape, ir )
 
 # Load the network and get the network shape information
 exec_net = ie.load_network(network = net, device_name = DEVICE)
-n, c = input_shape
+#n, c = input_shape
 
 
 # Predict
-for _ in range(5):
+import time
+st = time.time()
+n_iterations = 5000
+
+for _ in range(n_iterations):
     r = np.random.randint( x_test.shape[0] )
     # pred_outs = model.predict( x_test[r,:,:].reshape( 1, 28*28) )
-    res = exec_net.infer({input_blob: x_test[r,:,:].reshape( 1, 28*28)})
+    #res = exec_net.infer({input_blob: x_test[r,:,:].reshape( 1, 28*28)}) #for MLP
+    res = exec_net.infer({input_blob: x_test[r,:,:].reshape( 1, 1,28,28)}) #for CNN
 
-    print( 'r=', r )
     output_logits = res[output_blob][0]
-    print( 'res[output_blob] = ', output_logits.argmax() )
-    print( 'ground truth = ', y_test[r], )
-    print( '' )
-    cv2.imshow( 'test image', x_test[r,:,:].astype('uint8') )
-    cv2.waitKey(0)
+    # print( 'r=', r )
+    # print( 'res[output_blob] = ', output_logits.argmax() )
+    # print( 'ground truth = ', y_test[r], )
+    # print( '' )
+    # cv2.imshow( 'test image', x_test[r,:,:].astype('uint8') )
+    # cv2.waitKey(0)
+print( '%d iterations took %4.4f ms' %(n_iterations,  1000. * ( time.time() - st ) ) )

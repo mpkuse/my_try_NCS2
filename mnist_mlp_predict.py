@@ -1,3 +1,7 @@
+# 1. Load keras model (.h5)
+# 2. Convert to frozen tensorflow graph
+# 3. Do some sample prediction on keras model (.h5)
+
 import numpy as np
 import tensorflow as tf
 import code
